@@ -7,7 +7,7 @@ CREATE TABLE resources (
   title TEXT NOT NULL,
   description TEXT,
   url TEXT,
-  category TEXT NOT NULL CHECK (category IN ('scholarship', 'visa', 'job', 'accommodation', 'general')),
+  category TEXT NOT NULL CHECK (category IN ('scholarship', 'visa', 'job', 'accommodation', 'general', 'university')),
   country TEXT DEFAULT 'Canada',
   institution TEXT,
   deadline DATE,
