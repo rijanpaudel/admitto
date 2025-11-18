@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
+import Link from 'next/link'
 import { Card } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -156,22 +157,22 @@ export default function AskAIPage() {
       {/* Navigation */}
       <nav className="border-b bg-white sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-          <a href="/" className="text-2xl font-bold text-blue-600">
+          <Link href="/" className="text-2xl font-bold text-blue-600">
             Nepali Abroad Helper
-          </a>
+          </Link>
           <div className="flex gap-6">
-            <a href="/scholarships" className="text-gray-600 hover:text-blue-600 transition">
+            <Link href="/scholarships" className="text-gray-600 hover:text-blue-600 transition">
               Scholarships
-            </a>
-            <a href="/visa-guide" className="text-gray-600 hover:text-blue-600 transition">
+            </Link>
+            <Link href="/visa-guide" className="text-gray-600 hover:text-blue-600 transition">
               Visa Guide
-            </a>
-            <a href="/jobs" className="text-gray-600 hover:text-blue-600 transition">
+            </Link>
+            <Link href="/jobs" className="text-gray-600 hover:text-blue-600 transition">
               Jobs
-            </a>
-            <a href="/ask-ai" className="text-blue-600 font-medium">
+            </Link>
+            <Link href="/ask-ai" className="text-blue-600 font-medium">
               Ask AI
-            </a>
+            </Link>
           </div>
         </div>
       </nav>
