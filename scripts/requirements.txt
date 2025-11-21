@@ -1,23 +1,27 @@
-# Web scraping
+# Core dependencies
 requests==2.31.0
 beautifulsoup4==4.12.3
-selenium==4.16.0
 lxml==5.1.0
+python-dotenv==1.0.1
 
-# Data processing
-pandas==2.2.0
-numpy==1.26.3
-
-# Supabase integration
+# Database
 supabase==2.3.4
 
 # OpenAI for embeddings
 openai==1.12.0
-langchain==0.1.6
-langchain-openai==0.0.5
-tiktoken==0.5.2
 
-# Utilities
-python-dotenv==1.0.1
+# Data processing
+pandas==2.2.0
+
+# URL parsing and robots.txt
+urllib3==2.1.0
+
+# Scheduling (optional)
 schedule==1.2.1
-openai==1.12.0
+python-crontab==3.0.0
+
+# Link checking
+linkchecker==10.3.0
+
+# Logging
+colorlog==6.8.0python-dateutil==2.8.2
