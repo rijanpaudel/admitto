@@ -25,7 +25,7 @@ function HomePage() {
       <nav className="border-b bg-white/90 backdrop-blur-md sticky top-0 z-50 shadow-sm">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <Link href="/" className="text-2xl font-bold font-heading bg-gradient-primary bg-clip-text text-transparent">
-            Nepali Abroad Helper
+            Admitto
           </Link>
 
           {/* Desktop Navigation */}
@@ -302,9 +302,9 @@ function HomePage() {
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-4 gap-8 mb-8">
             <div>
-              <h3 className="font-bold font-heading text-lg mb-4 bg-gradient-primary bg-clip-text text-transparent">Nepali Abroad Helper</h3>
+              <h3 className="font-bold font-heading text-lg mb-4 bg-gradient-primary bg-clip-text text-transparent">Admitto</h3>
               <p className="text-sm text-gray-600 leading-relaxed">
-                Free, curated, and AI-powered platform helping Nepali students study in Canada.
+                Free, curated, and AI-powered platform helping students study abroad.
               </p>
             </div>
             <div>
@@ -333,7 +333,7 @@ function HomePage() {
           <div className="pt-8 border-t text-center text-sm text-gray-600">
             <p className="flex items-center justify-center gap-2">
               <Check className="h-4 w-4 text-green-600" />
-              All information sourced from official channels • © 2025 Nepali Abroad Helper
+              All information sourced from official channels • © 2025 Admitto
             </p>
           </div>
         </div>

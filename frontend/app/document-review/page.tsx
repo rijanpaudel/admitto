@@ -151,7 +151,7 @@ export default function DocumentReviewPage() {
       <nav className="border-b bg-white/90 backdrop-blur-md sticky top-0 z-50 shadow-sm">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <Link href="/" className="text-2xl font-bold font-heading bg-gradient-primary bg-clip-text text-transparent">
-            Nepali Abroad Helper
+            Admitto
           </Link>
 
           {/* Desktop Navigation */}

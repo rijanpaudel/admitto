@@ -15,18 +15,18 @@ async function getAllScholarships() {
     .select('*')
     .eq('category', 'scholarship')
     .order('created_at', { ascending: false })
-  
+
   if (error) {
     console.error('Error fetching scholarships:', error)
     return []
   }
-  
+
   return data as Resource[]
 }
 
 export default async function ScholarshipsPage() {
   const scholarships = await getAllScholarships()
-  
+
   // helper to safely check includes on possible string or array fields
   const fieldIncludes = (field: unknown, needle: string) => {
     if (typeof field === 'string') return field.includes(needle)
@@ -34,11 +34,11 @@ export default async function ScholarshipsPage() {
     return false
   }
 
-  const undergrad = scholarships.filter(s => 
+  const undergrad = scholarships.filter(s =>
     fieldIncludes(s.metadata?.level, 'Undergraduate') || fieldIncludes(s.tags, 'undergraduate')
   )
-  const graduate = scholarships.filter(s => 
-    fieldIncludes(s.metadata?.level, 'Masters') || fieldIncludes(s.metadata?.level, 'PhD') || 
+  const graduate = scholarships.filter(s =>
+    fieldIncludes(s.metadata?.level, 'Masters') || fieldIncludes(s.metadata?.level, 'PhD') ||
     fieldIncludes(s.tags, 'graduate') || fieldIncludes(s.tags, 'doctoral')
   )
 
@@ -48,7 +48,7 @@ export default async function ScholarshipsPage() {
       <nav className="border-b bg-white sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <Link href="/" className="text-2xl font-bold text-blue-600">
-            Nepali Abroad Helper
+            Admitto
           </Link>
           <div className="flex gap-6">
             <Link href="/scholarships" className="text-blue-600 font-medium">
@@ -138,10 +138,10 @@ function ScholarshipGrid({ scholarships }: { scholarships: Resource[] }) {
               <div className="flex items-center gap-2 text-sm">
                 <Calendar className="h-4 w-4 text-orange-600" />
                 <span className="font-medium">Deadline:</span>
-                <span>{new Date(scholarship.deadline).toLocaleDateString('en-US', { 
-                  year: 'numeric', 
-                  month: 'long', 
-                  day: 'numeric' 
+                <span>{new Date(scholarship.deadline).toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric'
                 })}</span>
               </div>
             )}

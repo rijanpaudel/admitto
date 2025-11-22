@@ -5,8 +5,8 @@ import './globals.css'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Nepali Abroad Helper - Canada Study Guide',
-  description: 'Your complete guide to studying in Canada - scholarships, visas, and jobs for Nepali students',
+  title: 'Admitto - Your Global Study Abroad Platform',
+  description: 'Free platform for scholarships, visa guides, and AI-powered assistance for students studying abroad',
 }
 
 export default function RootLayout({

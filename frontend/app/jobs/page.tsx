@@ -25,7 +25,7 @@ export default async function JobsPage() {
       <nav className="border-b bg-white sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <Link href="/" className="text-2xl font-bold text-blue-600">
-            Nepali Abroad Helper
+            Admitto
           </Link>
           <div className="flex gap-6">
             <Link href="/scholarships" className="text-gray-600 hover:text-blue-600 transition">

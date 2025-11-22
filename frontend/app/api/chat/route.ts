@@ -118,7 +118,7 @@ export async function POST(req: NextRequest) {
     const context = formatContext(relevantResources)
     console.log('Context length:', context.length)
 
-    const systemMessage = `You are an AI assistant for "Nepali Abroad Helper", helping Nepali students study in Canada.
+    const systemMessage = `You are an AI assistant for "Admitto", helping students study abroad globally.
 
 Use the context below as your primary source of truth.
 If the context does not fully answer the question, do your best with the closest matches and explain any limitations.
@@ -148,22 +148,22 @@ ${context}
 
     // 5) Create custom streaming response
     const encoder = new TextEncoder()
-    
+
     const customStream = new ReadableStream({
       async start(controller) {
         try {
           for await (const chunk of stream) {
             const content = chunk.choices[0]?.delta?.content
             if (content) {
-              const data = `data: ${JSON.stringify({ 
-                choices: [{ 
-                  delta: { content } 
-                }] 
+              const data = `data: ${JSON.stringify({
+                choices: [{
+                  delta: { content }
+                }]
               })}\n\n`
               controller.enqueue(encoder.encode(data))
             }
           }
-          
+
           controller.enqueue(encoder.encode('data: [DONE]\n\n'))
           controller.close()
         } catch (error) {
@@ -197,9 +197,9 @@ ${context}
         error: 'Failed to process chat request',
         details: error instanceof Error ? error.message : 'Unknown error',
       }),
-      { 
-        status: 500, 
-        headers: { 'Content-Type': 'application/json' } 
+      {
+        status: 500,
+        headers: { 'Content-Type': 'application/json' }
       }
     )
   }

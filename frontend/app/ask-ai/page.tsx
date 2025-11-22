@@ -43,7 +43,7 @@ export default function AskAIPage() {
 
   const handleSubmit = async (e?: React.FormEvent | React.MouseEvent) => {
     if (e) e.preventDefault()
-    
+
     if (!input.trim() || isLoading) return
 
     const userMessage: Message = {
@@ -116,15 +116,15 @@ export default function AskAIPage() {
                 const parsed = JSON.parse(data)
                 if (parsed.choices?.[0]?.delta?.content) {
                   assistantContent += parsed.choices[0].delta.content
-                  setMessages(prev => 
-                    prev.map(m => 
-                      m.id === assistantMessage.id 
+                  setMessages(prev =>
+                    prev.map(m =>
+                      m.id === assistantMessage.id
                         ? { ...m, content: assistantContent }
                         : m
                     )
                   )
                 }
-              // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                // eslint-disable-next-line @typescript-eslint/no-unused-vars
               } catch (e) {
                 // Skip invalid JSON
               }
@@ -158,7 +158,7 @@ export default function AskAIPage() {
       <nav className="border-b bg-white sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
           <Link href="/" className="text-2xl font-bold text-blue-600">
-            Nepali Abroad Helper
+            Admitto
           </Link>
           <div className="flex gap-6">
             <Link href="/scholarships" className="text-gray-600 hover:text-blue-600 transition">
@@ -226,16 +226,14 @@ export default function AskAIPage() {
                   {messages.map((message) => (
                     <div
                       key={message.id}
-                      className={`flex ${
-                        message.role === 'user' ? 'justify-end' : 'justify-start'
-                      }`}
+                      className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'
+                        }`}
                     >
                       <div
-                        className={`max-w-[80%] rounded-lg p-4 ${
-                          message.role === 'user'
+                        className={`max-w-[80%] rounded-lg p-4 ${message.role === 'user'
                             ? 'bg-blue-600 text-white'
                             : 'bg-gray-100 text-gray-900'
-                        }`}
+                          }`}
                       >
                         <div className="text-sm font-semibold mb-1">
                           {message.role === 'user' ? 'You' : 'AI Assistant'}
@@ -292,8 +290,8 @@ export default function AskAIPage() {
                   disabled={isLoading}
                   className="flex-1"
                 />
-                <Button 
-                  onClick={handleSubmit} 
+                <Button
+                  onClick={handleSubmit}
                   disabled={isLoading || !input.trim()}
                 >
                   {isLoading ? (
