@@ -1,24 +1,32 @@
+'use client'
+
+import { useState, useEffect } from 'react'
 import { supabase } from '@/lib/supabase'
 import type { Resource } from '@/lib/supabase'
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
-import { Briefcase, ExternalLink, Clock, Check, CheckCircle, GraduationCap } from 'lucide-react'
+import { Briefcase, ExternalLink, Clock, Check, CheckCircle, GraduationCap, Menu, X } from 'lucide-react'
 import Link from 'next/link'
 import Image from "next/image";
 
-async function getJobResources() {
-  const { data } = await supabase
-    .from('resources')
-    .select('*')
-    .eq('category', 'job')
-    .order('created_at', { ascending: false })
+export default function JobsPage() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [jobResources, setJobResources] = useState<Resource[]>([])
 
-  return (data as Resource[]) || []
-}
+  useEffect(() => {
+    async function fetchJobResources() {
+      const { data } = await supabase
+        .from('resources')
+        .select('*')
+        .eq('category', 'job')
+        .order('created_at', { ascending: false })
 
-export default async function JobsPage() {
-  const jobResources = await getJobResources()
+      setJobResources((data as Resource[]) || [])
+    }
+
+    fetchJobResources()
+  }, [])
 
   return (
     <div className="min-h-screen bg-slate-50">
@@ -35,7 +43,9 @@ export default async function JobsPage() {
               className="h-14 w-auto object-contain"
             />
           </Link>
-          <div className="flex gap-6">
+
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex gap-6">
             <Link href="/scholarships" className="text-gray-600 hover:text-blue-600 transition">
               Scholarships
             </Link>
@@ -52,7 +62,59 @@ export default async function JobsPage() {
               Document Review
             </Link>
           </div>
+
+          {/* Mobile Menu Button */}
+          <button
+            className="md:hidden p-2 hover:bg-gray-100 rounded-lg transition-smooth"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle menu"
+          >
+            {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
         </div>
+
+        {/* Mobile Menu */}
+        {mobileMenuOpen && (
+          <div className="md:hidden border-t bg-white animate-slide-down">
+            <div className="container mx-auto px-4 py-4 flex flex-col gap-3">
+              <Link
+                href="/scholarships"
+                className="px-4 py-3 hover:bg-gray-50 rounded-lg transition-smooth font-medium"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Scholarships
+              </Link>
+              <Link
+                href="/visa-guide"
+                className="px-4 py-3 hover:bg-gray-50 rounded-lg transition-smooth font-medium"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Visa Guide
+              </Link>
+              <Link
+                href="/jobs"
+                className="px-4 py-3 hover:bg-gray-50 rounded-lg transition-smooth font-medium text-blue-600"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Jobs
+              </Link>
+              <Link
+                href="/ask-ai"
+                className="px-4 py-3 hover:bg-gray-50 rounded-lg transition-smooth font-medium"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Ask AI
+              </Link>
+              <Link
+                href="/document-review"
+                className="px-4 py-3 hover:bg-gray-50 rounded-lg transition-smooth font-medium"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Document Review
+              </Link>
+            </div>
+          </div>
+        )}
       </nav>
 
       {/* Header */}

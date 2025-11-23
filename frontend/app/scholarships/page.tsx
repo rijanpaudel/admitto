@@ -1,3 +1,6 @@
+'use client'
+
+import { useState, useEffect } from 'react'
 import { supabase } from '@/lib/supabase'
 import type { Resource } from '@/lib/supabase'
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from '@/components/ui/card'
@@ -5,28 +8,33 @@ import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 //import { Input } from '@/components/ui/input'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { DollarSign, Calendar, ArrowRight } from 'lucide-react'
+import { DollarSign, Calendar, ArrowRight, Menu, X } from 'lucide-react'
 import Link from 'next/link'
 import Image from "next/image";
 //import { ScholarshipFilters } from '@/components/scholarship-filters'
 
-async function getAllScholarships() {
-  const { data, error } = await supabase
-    .from('resources')
-    .select('*')
-    .eq('category', 'scholarship')
-    .order('created_at', { ascending: false })
+export default function ScholarshipsPage() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [scholarships, setScholarships] = useState<Resource[]>([])
 
-  if (error) {
-    console.error('Error fetching scholarships:', error)
-    return []
-  }
+  useEffect(() => {
+    async function fetchScholarships() {
+      const { data, error } = await supabase
+        .from('resources')
+        .select('*')
+        .eq('category', 'scholarship')
+        .order('created_at', { ascending: false })
 
-  return data as Resource[]
-}
+      if (error) {
+        console.error('Error fetching scholarships:', error)
+        return
+      }
 
-export default async function ScholarshipsPage() {
-  const scholarships = await getAllScholarships()
+      setScholarships(data as Resource[])
+    }
+
+    fetchScholarships()
+  }, [])
 
   // helper to safely check includes on possible string or array fields
   const fieldIncludes = (field: unknown, needle: string) => {
@@ -58,7 +66,9 @@ export default async function ScholarshipsPage() {
               className="h-14 w-auto object-contain"
             />
           </Link>
-          <div className="flex gap-6">
+
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex gap-6">
             <Link href="/scholarships" className="text-blue-600 font-medium">
               Scholarships
             </Link>
@@ -75,7 +85,59 @@ export default async function ScholarshipsPage() {
               Document Review
             </Link>
           </div>
+
+          {/* Mobile Menu Button */}
+          <button
+            className="md:hidden p-2 hover:bg-gray-100 rounded-lg transition-smooth"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle menu"
+          >
+            {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
         </div>
+
+        {/* Mobile Menu */}
+        {mobileMenuOpen && (
+          <div className="md:hidden border-t bg-white animate-slide-down">
+            <div className="container mx-auto px-4 py-4 flex flex-col gap-3">
+              <Link
+                href="/scholarships"
+                className="px-4 py-3 hover:bg-gray-50 rounded-lg transition-smooth font-medium text-blue-600"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Scholarships
+              </Link>
+              <Link
+                href="/visa-guide"
+                className="px-4 py-3 hover:bg-gray-50 rounded-lg transition-smooth font-medium"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Visa Guide
+              </Link>
+              <Link
+                href="/jobs"
+                className="px-4 py-3 hover:bg-gray-50 rounded-lg transition-smooth font-medium"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Jobs
+              </Link>
+              <Link
+                href="/ask-ai"
+                className="px-4 py-3 hover:bg-gray-50 rounded-lg transition-smooth font-medium"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Ask AI
+              </Link>
+              <Link
+                href="/document-review"
+                className="px-4 py-3 hover:bg-gray-50 rounded-lg transition-smooth font-medium"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Document Review
+              </Link>
+            </div>
+          </div>
+        )}
       </nav>
 
       {/* Header */}

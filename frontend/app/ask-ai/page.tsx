@@ -6,7 +6,7 @@ import { Card } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Badge } from '@/components/ui/badge'
-import { Send, Sparkles, Loader2, ExternalLink } from 'lucide-react'
+import { Send, Sparkles, Loader2, ExternalLink, Menu, X } from 'lucide-react'
 import Image from "next/image";
 
 const EXAMPLE_QUESTIONS = [
@@ -31,6 +31,7 @@ interface Source {
 
 export default function AskAIPage() {
   const messagesEndRef = useRef<HTMLDivElement>(null)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [messages, setMessages] = useState<Message[]>([])
   const [input, setInput] = useState('')
   const [isLoading, setIsLoading] = useState(false)
@@ -168,7 +169,9 @@ export default function AskAIPage() {
               className="h-14 w-auto object-contain"
             />
           </Link>
-          <div className="flex gap-6">
+
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex gap-6">
             <Link href="/scholarships" className="text-gray-600 hover:text-blue-600 transition">
               Scholarships
             </Link>
@@ -185,7 +188,59 @@ export default function AskAIPage() {
               Document Review
             </Link>
           </div>
+
+          {/* Mobile Menu Button */}
+          <button
+            className="md:hidden p-2 hover:bg-gray-100 rounded-lg transition-smooth"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle menu"
+          >
+            {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
         </div>
+
+        {/* Mobile Menu */}
+        {mobileMenuOpen && (
+          <div className="md:hidden border-t bg-white animate-slide-down">
+            <div className="container mx-auto px-4 py-4 flex flex-col gap-3">
+              <Link
+                href="/scholarships"
+                className="px-4 py-3 hover:bg-gray-50 rounded-lg transition-smooth font-medium"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Scholarships
+              </Link>
+              <Link
+                href="/visa-guide"
+                className="px-4 py-3 hover:bg-gray-50 rounded-lg transition-smooth font-medium"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Visa Guide
+              </Link>
+              <Link
+                href="/jobs"
+                className="px-4 py-3 hover:bg-gray-50 rounded-lg transition-smooth font-medium"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Jobs
+              </Link>
+              <Link
+                href="/ask-ai"
+                className="px-4 py-3 hover:bg-gray-50 rounded-lg transition-smooth font-medium text-blue-600"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Ask AI
+              </Link>
+              <Link
+                href="/document-review"
+                className="px-4 py-3 hover:bg-gray-50 rounded-lg transition-smooth font-medium"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Document Review
+              </Link>
+            </div>
+          </div>
+        )}
       </nav>
 
       {/* Header */}
@@ -211,7 +266,7 @@ export default function AskAIPage() {
                     key={idx}
                     variant="outline"
                     size="sm"
-                    className="text-left h-auto py-2 px-3"
+                    className="text-left h-auto py-2 px-3 whitespace-normal break-words"
                     onClick={() => handleExampleClick(question)}
                   >
                     {question}
