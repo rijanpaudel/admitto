@@ -1,4 +1,4 @@
-# Nepali Abroad Helper
+# Admitto
 
 Complete platform helping Nepali students navigate studying in Canada - scholarships, visas, and job opportunities.
 
